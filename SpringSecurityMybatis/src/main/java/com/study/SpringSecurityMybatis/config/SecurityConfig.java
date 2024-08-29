@@ -35,7 +35,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.headers().frameOptions().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.cors();
+        http.cors(); // WebMvcConfig 설정을 따라감
+
         http.exceptionHandling().authenticationEntryPoint(authenticationHandler);
 
         http.authorizeRequests()

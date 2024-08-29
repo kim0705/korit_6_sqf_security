@@ -10,6 +10,7 @@
         <result property="username" column="username" />
         <result property="password" column="password" />
         <result property="name" column="name" />
+        <result property="email" column="email" />
         <collection property="userRoles" javaType="java.util.Set" resultMap="userRolesResultMap" />
     </resultMap>
 
@@ -39,6 +40,7 @@
             u.username,
             u.password,
             u.name,
+            u.email,
             ur.id as user_roles_id,
             ur.user_id as ur_user_id,
             ur.role_id as ur_role_id,
@@ -57,6 +59,7 @@
             u.username,
             u.password,
             u.name,
+            u.email,
             ur.id as user_roles_id,
             ur.user_id as ur_user_id,
             ur.role_id as ur_role_id,
@@ -74,6 +77,6 @@
             useGeneratedKeys="true"
             keyProperty="id">
         insert into user
-        values(default, #{username}, #{password}, #{name})
+        values(default, #{username}, #{password}, #{name}, #{email})
     </insert>
 </mapper>

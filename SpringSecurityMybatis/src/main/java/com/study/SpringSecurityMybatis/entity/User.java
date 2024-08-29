@@ -19,6 +19,7 @@ public class User {
     @JsonIgnore
     private String password;
     private String name;
+    private String email;
     private Set<UserRoles> userRoles;
 
     public PrincipalUser toPrincipal() {
