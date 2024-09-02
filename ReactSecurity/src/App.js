@@ -12,7 +12,7 @@ function App() {
         ["accessTokenValidQuery"],
         async () => {
             console.log("쿼리에서 요청!!!");
-            return await instance.get("/auth/access", {
+            return await instance.get("/auth/access", { // accessToken이 유효한지 검증 요청
                 params: {
                     accessToken: localStorage.getItem("accessToken")
                 }
