@@ -1,5 +1,6 @@
 package com.study.SpringSecurityMybatis.aspect;
 
+import com.study.SpringSecurityMybatis.dto.request.ReqOAuth2SignupDto;
 import com.study.SpringSecurityMybatis.dto.request.ReqSignupDto;
 import com.study.SpringSecurityMybatis.exception.ValidException;
 import com.study.SpringSecurityMybatis.service.UserService;
@@ -39,6 +40,9 @@ public class ValidAspect {
             case "signup": // 메서드 이름이 signup이면 validSignupDto()호출
                 validSignupDto(args, bindingResult);
                 break;
+            case "oAuth2Signup":
+                validOAuth2SignupDto(args, bindingResult);
+                break;
         }
 
         if(bindingResult.hasErrors()) { // bindingResult에 오류가 있으면 예외 터뜨리기
@@ -60,7 +64,22 @@ public class ValidAspect {
                     FieldError fieldError = new FieldError("username", "username", "이미 존재하는 사용자이름입니다.");
                     bindingResult.addError(fieldError);
                 }
+            }
+        }
+    }
 
+    private void validOAuth2SignupDto(Object[] args, BeanPropertyBindingResult bindingResult) {
+        for(Object arg : args) {
+            if(arg.getClass() == ReqOAuth2SignupDto.class) {
+                ReqOAuth2SignupDto dto = (ReqOAuth2SignupDto) arg;
+                if(!dto.getPassword().equals(dto.getCheckPassword())) {
+                    FieldError fieldError = new FieldError("checkPassword", "checkPassword", "비밀번호가 일치하지 않습니다.");
+                    bindingResult.addError(fieldError);
+                }
+                if(userService.isDuplicateUsername(dto.getUsername())) {
+                    FieldError fieldError = new FieldError("username", "username", "이미 존재하는 사용자이름입니다.");
+                    bindingResult.addError(fieldError);
+                }
             }
         }
     }

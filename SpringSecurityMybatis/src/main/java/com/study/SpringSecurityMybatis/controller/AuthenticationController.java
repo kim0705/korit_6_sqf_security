@@ -1,11 +1,9 @@
 package com.study.SpringSecurityMybatis.controller;
 
 import com.study.SpringSecurityMybatis.aspect.annotation.ValidAop;
-import com.study.SpringSecurityMybatis.dto.request.ReqAccessDto;
-import com.study.SpringSecurityMybatis.dto.request.ReqOAuth2MergeDto;
-import com.study.SpringSecurityMybatis.dto.request.ReqSigninDto;
-import com.study.SpringSecurityMybatis.dto.request.ReqSignupDto;
+import com.study.SpringSecurityMybatis.dto.request.*;
 import com.study.SpringSecurityMybatis.entity.OAuth2User;
+import com.study.SpringSecurityMybatis.entity.User;
 import com.study.SpringSecurityMybatis.exception.SignupException;
 import com.study.SpringSecurityMybatis.service.OAuth2Service;
 import com.study.SpringSecurityMybatis.service.TokenService;
@@ -50,6 +48,14 @@ public class AuthenticationController {
         OAuth2User oAuth2User = userService.mergeSignin(dto);
         oAuth2Service.merge(oAuth2User);
         return ResponseEntity.ok().body(true); // 응답데이터는 프론트에서 원하는 형태로
+    }
+
+    @ValidAop
+    @PostMapping("/auth/oauth2/signup")
+    public ResponseEntity<?> oAuth2Signup(@Valid @RequestBody ReqOAuth2SignupDto dto, BindingResult bindingResult) {
+        System.out.println(dto);
+        oAuth2Service.signup(dto);
+        return ResponseEntity.ok().body(true);
     }
 
     @GetMapping("/auth/access")

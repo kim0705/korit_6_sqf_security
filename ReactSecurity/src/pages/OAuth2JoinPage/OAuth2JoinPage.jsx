@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { css } from '@emotion/react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { signupApi } from '../../apis/signupApi';
-import { oauth2MergeApi } from '../../apis/oauth2Api';
+import { oauth2MergeApi, oauth2SignupApi } from '../../apis/oauth2Api';
 
 const layout = css`
     display: flex;
@@ -182,7 +182,23 @@ function OAuth2JoinPage(props) {
     }
 
     const handleJoinSubmitClick = async () => {
+		const joinUser = {
+			...inputUser,
+			oauth2Name: searchParams.get("oAuth2Name"),
+			provider: searchParams.get("provider")
+		}
+		const signupData = await oauth2SignupApi(joinUser);
+
+		console.log(signupData.data);
+
+		if(!signupData.isSuccess) {
+            showFieldErrorMessage(signupData.fieldErrors);
+            console.log(signupData.fieldErrors);
+            return;
+        }
         
+        alert("회원가입이 완료되었습니다.");
+        navigate("/user/login");     
     }
 
     const showFieldErrorMessage = (fieldErrors) => {

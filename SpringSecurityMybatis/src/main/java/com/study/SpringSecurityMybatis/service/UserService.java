@@ -1,9 +1,6 @@
 package com.study.SpringSecurityMybatis.service;
 
-import com.study.SpringSecurityMybatis.dto.request.ReqOAuth2MergeDto;
-import com.study.SpringSecurityMybatis.dto.request.ReqProfileImgDto;
-import com.study.SpringSecurityMybatis.dto.request.ReqSigninDto;
-import com.study.SpringSecurityMybatis.dto.request.ReqSignupDto;
+import com.study.SpringSecurityMybatis.dto.request.*;
 import com.study.SpringSecurityMybatis.dto.response.RespDeleteUserDto;
 import com.study.SpringSecurityMybatis.dto.response.RespSigninDto;
 import com.study.SpringSecurityMybatis.dto.response.RespSignupDto;
@@ -27,6 +24,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -167,5 +165,41 @@ public class UserService {
                 .provider(dto.getProvider())
                 .build();
     }
+
+    @Transactional(rollbackFor = SignupException.class)
+    public RespSignupDto insert(ReqOAuth2SignupDto dto) throws SignupException {
+        User user = null;
+        try {
+            user = dto.toEntity(passwordEncoder);
+            userMapper.save(user);
+
+            Role role = roleMapper.findByName("ROLE_USER");
+
+            if(role == null) {
+                role = Role.builder().name("ROLE_USER").build();
+                roleMapper.save(role);
+            }
+
+            UserRoles userRoles = UserRoles.builder()
+                    .userId(user.getId())
+                    .roleId(role.getId())
+                    .build();
+
+            userRolesMapper.save(userRoles);
+
+            user.setUserRoles(Set.of(userRoles));
+
+
+        } catch (Exception e) {
+            throw new SignupException(e.getMessage());
+        }
+
+        return RespSignupDto.builder()
+                .message("회원가입 완료")
+                .user(user)
+                .build();
+    }
+
+
 
 }

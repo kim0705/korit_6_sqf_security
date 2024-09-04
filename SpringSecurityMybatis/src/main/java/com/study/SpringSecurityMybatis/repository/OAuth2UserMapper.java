@@ -2,6 +2,7 @@ package com.study.SpringSecurityMybatis.repository;
 
 import com.study.SpringSecurityMybatis.entity.OAuth2User;
 import com.study.SpringSecurityMybatis.entity.User;
+import com.study.SpringSecurityMybatis.entity.UserRoles;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

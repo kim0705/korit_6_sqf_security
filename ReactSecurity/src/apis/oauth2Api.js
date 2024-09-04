@@ -36,3 +36,38 @@ export const oauth2MergeApi = async(user) => {
 
     return mergeData;
 }
+
+export const oauth2SignupApi = async (user) => {
+    let signupData = {
+        isSuccess: false,
+        ok: {
+            message: "",
+            user: null
+        },
+        fieldErrors: [
+            {
+                field: "",
+                defaultMessage: ""
+            }
+        ]
+    };
+
+    try {
+        const response = await instance.post("/auth/oauth2/signup", user);
+        signupData = {
+            isSuccess: true,
+            ok: response.data
+        }
+    } catch (error) {
+        const response = error.response;
+        signupData = {
+            isSuccess: false,
+            fieldErrors: response.data.map(fieldError => ({
+                field: fieldError.field, 
+                defaultMessage: fieldError.defaultMessage
+            }))
+        }
+    }
+
+    return oauth2SignupApi;
+}

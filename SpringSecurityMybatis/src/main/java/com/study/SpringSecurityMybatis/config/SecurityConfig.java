@@ -29,11 +29,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private OAuth2Service oAuth2Service;
 
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin().disable();
@@ -43,9 +38,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.cors(); // WebMvcConfig 설정을 따라감
 
-        http.oauth2Login()
+        http.oauth2Login() // 요청 날아올거임
                 .successHandler(oAuth2SuccessHandler)
-                .userInfoEndpoint() // 처음 연결
+                .userInfoEndpoint() // 로그인 유저 정보(OAuth2UserRequest) 가져옴
                 .userService(oAuth2Service);
 
         http.exceptionHandling()
