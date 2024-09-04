@@ -186,3 +186,79 @@ select
             left outer join role r on (r.id = ur.role_id)
         where
             username= ? [42000-200]
+2024-09-04 09:52:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO
+            OAUTH2_USER
+        VALUES(DEFAULT, ?, ?, ?[*]"; expected "[, ::, AT, FORMAT, *, /, %, +, -, ||, ~, !~, NOT, LIKE, ILIKE, REGEXP, IS, IN, BETWEEN, AND, OR, ,, )"; SQL statement:
+insert into
+            oauth2_user
+        values(default, ?, ?, ? [42001-200]
+2024-09-04 09:55:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO
+            OAUTH2_USER
+        VALUES(DEFAULT, ?, ?, ?[*]"; expected "[, ::, AT, FORMAT, *, /, %, +, -, ||, ~, !~, NOT, LIKE, ILIKE, REGEXP, IS, IN, BETWEEN, AND, OR, ,, )"; SQL statement:
+insert into
+            oauth2_user
+        values(default, ?, ?, ? [42001-200]
+2024-09-04 10:00:10 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO
+            OAUTH2_USER
+        VALUES(DEFAULT, ?, ?, ?[*]"; expected "[, ::, AT, FORMAT, *, /, %, +, -, ||, ~, !~, NOT, LIKE, ILIKE, REGEXP, IS, IN, BETWEEN, AND, OR, ,, )"; SQL statement:
+insert into
+            oauth2_user
+        values(default, ?, ?, ? [42001-200]
+2024-09-04 10:00:41 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO
+            OAUTH2_USER
+        VALUES(DEFAULT, ?, ?, ?[*]"; expected "[, ::, AT, FORMAT, *, /, %, +, -, ||, ~, !~, NOT, LIKE, ILIKE, REGEXP, IS, IN, BETWEEN, AND, OR, ,, )"; SQL statement:
+insert into
+            oauth2_user
+        values(default, ?, ?, ? [42001-200]
+2024-09-04 10:00:53 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO
+            OAUTH2_USER
+        VALUES(DEFAULT, ?, ?, ?[*]"; expected "[, ::, AT, FORMAT, *, /, %, +, -, ||, ~, !~, NOT, LIKE, ILIKE, REGEXP, IS, IN, BETWEEN, AND, OR, ,, )"; SQL statement:
+insert into
+            oauth2_user
+        values(default, ?, ?, ? [42001-200]
+2024-09-04 10:04:10 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO
+        OAUTH2_USER
+        VALUES(DEFAULT, ?, ?, ?[*]"; expected "[, ::, AT, FORMAT, *, /, %, +, -, ||, ~, !~, NOT, LIKE, ILIKE, REGEXP, IS, IN, BETWEEN, AND, OR, ,, )"; SQL statement:
+insert into
+        oauth2_user
+        values(default, ?, ?, ? [42001-200]
+2024-09-04 10:06:07 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO
+        OAUTH2_USER
+        VALUES(DEFAULT, ?, ?, ?[*]"; expected "[, ::, AT, FORMAT, *, /, %, +, -, ||, ~, !~, NOT, LIKE, ILIKE, REGEXP, IS, IN, BETWEEN, AND, OR, ,, )"; SQL statement:
+insert into
+        oauth2_user
+        values(default, ?, ?, ? [42001-200]
+2024-09-04 10:10:05 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO
+        OAUTH2_USER
+        VALUES(DEFAULT, ?, ?, ?[*]"; expected "[, ::, AT, FORMAT, *, /, %, +, -, ||, ~, !~, NOT, LIKE, ILIKE, REGEXP, IS, IN, BETWEEN, AND, OR, ,, )"; SQL statement:
+insert into
+        oauth2_user
+        values(default, ?, ?, ? [42001-200]
+2024-09-04 10:11:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO
+        OAUTH2_USER
+        VALUES(DEFAULT, ?, ?, ?[*]"; expected "[, ::, AT, FORMAT, *, /, %, +, -, ||, ~, !~, NOT, LIKE, ILIKE, REGEXP, IS, IN, BETWEEN, AND, OR, ,, )"; SQL statement:
+insert into
+        oauth2_user
+        values(default, ?, ?, ? [42001-200]
+2024-09-04 10:18:45 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "TRUNCATE OAUTH2_USER[*]"; expected "TABLE"; SQL statement:
+TRUNCATE OAUTH2_USER [42001-200]
+2024-09-04 10:18:47 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "TRUNCATE OAUTH2_USER[*]"; expected "TABLE"; SQL statement:
+TRUNCATE OAUTH2_USER [42001-200]
+2024-09-04 10:47:43 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM OAUTH2_USER 
+
+TRUNCATE TABLE[*] OAUTH2_USER"; SQL statement:
+SELECT * FROM OAUTH2_USER 
+
+TRUNCATE TABLE OAUTH2_USER [42000-200]

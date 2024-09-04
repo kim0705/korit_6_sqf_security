@@ -2,9 +2,12 @@ package com.study.SpringSecurityMybatis.controller;
 
 import com.study.SpringSecurityMybatis.aspect.annotation.ValidAop;
 import com.study.SpringSecurityMybatis.dto.request.ReqAccessDto;
+import com.study.SpringSecurityMybatis.dto.request.ReqOAuth2MergeDto;
 import com.study.SpringSecurityMybatis.dto.request.ReqSigninDto;
 import com.study.SpringSecurityMybatis.dto.request.ReqSignupDto;
+import com.study.SpringSecurityMybatis.entity.OAuth2User;
 import com.study.SpringSecurityMybatis.exception.SignupException;
+import com.study.SpringSecurityMybatis.service.OAuth2Service;
 import com.study.SpringSecurityMybatis.service.TokenService;
 import com.study.SpringSecurityMybatis.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +26,8 @@ public class AuthenticationController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private OAuth2Service oAuth2Service;
 
     @Autowired
     private TokenService tokenService;
@@ -37,6 +42,14 @@ public class AuthenticationController {
     @PostMapping("/auth/signin")
     public ResponseEntity<?> signin(@Valid @RequestBody ReqSigninDto dto, BindingResult bindingResult) {
         return ResponseEntity.ok().body(userService.getGeneratedAccessToken(dto));
+    }
+
+    @ValidAop
+    @PostMapping("/auth/oauth2/merge")
+    public ResponseEntity<?> oAuth2Merge(@Valid @RequestBody ReqOAuth2MergeDto dto, BindingResult bindingResult) {
+        OAuth2User oAuth2User = userService.mergeSignin(dto);
+        oAuth2Service.merge(oAuth2User);
+        return ResponseEntity.ok().body(true); // 응답데이터는 프론트에서 원하는 형태로
     }
 
     @GetMapping("/auth/access")

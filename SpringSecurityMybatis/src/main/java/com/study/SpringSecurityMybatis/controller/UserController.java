@@ -1,14 +1,12 @@
 package com.study.SpringSecurityMybatis.controller;
 
+import com.study.SpringSecurityMybatis.dto.request.ReqProfileImgDto;
 import com.study.SpringSecurityMybatis.security.principal.PrincipalUser;
 import com.study.SpringSecurityMybatis.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserController {
@@ -34,6 +32,11 @@ public class UserController {
     @DeleteMapping("/user/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable Long id) {
         return ResponseEntity.ok().body(userService.deleteUser(id));
+    }
+
+    @PatchMapping("/user/img") // PatchMapping은 null을 허용하지 않음
+    public ResponseEntity<?> updateProfileImg(@RequestBody ReqProfileImgDto dto) {
+        return ResponseEntity.ok().body(userService.updateProfileImg(dto));
     }
 
 }

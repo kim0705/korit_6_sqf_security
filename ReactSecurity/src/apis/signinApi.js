@@ -29,7 +29,7 @@ export const signinApi = async (user) => {
             signinData['error'] = response.data;
         } else {
             signinData['errorStatus'] = "fieldError";
-            signinData['errorStatus'] = response.data.map(fieldError => ({
+            signinData['error'] = response.data.map(fieldError => ({
                 field: fieldError.field, 
                 defaultMessage: fieldError.defaultMessage
             }));

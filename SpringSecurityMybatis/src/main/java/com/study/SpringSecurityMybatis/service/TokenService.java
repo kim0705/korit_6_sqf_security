@@ -18,11 +18,12 @@ public class TokenService {
     private JwtProvider jwtProvider;
 
     public boolean isValidAccessToken(String bearerAccessToken) {
-        String accessToken = jwtProvider.removeBearer(bearerAccessToken);
         try {
+            String accessToken = jwtProvider.removeBearer(bearerAccessToken);
             Claims claims = jwtProvider.getClaims(accessToken);
             Long userId = ((Integer) claims.get("userId")).longValue();
             User user = userMapper.findById(userId);
+
             if(user == null) {
                 throw new RuntimeException();
             }

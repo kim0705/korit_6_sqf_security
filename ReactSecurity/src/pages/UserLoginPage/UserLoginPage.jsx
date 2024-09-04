@@ -1,8 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { signinApi } from '../../apis/signinApi';
+import { instance } from '../../apis/util/instance';
 
 const layout = css`
     display: flex;
@@ -70,6 +71,7 @@ const loginButton = css`
 `;
 
 function UserLoginPage(props) {
+    const navigate = useNavigate();
 
     const [ inputUser, setInputUser ] = useState({
         username: "",
@@ -123,7 +125,19 @@ function UserLoginPage(props) {
         }
 
         localStorage.setItem("accessToken", "Bearer " + signinData.token.accessToken);
-        window.location.replace("/");
+
+        instance.interceptors.request.use(config => { // 로그인 후 토큰저장
+            config.headers["Authorization"] = localStorage.getItem("accessToken");
+            return config;
+        });
+
+        console.log(window.history.length);
+
+        if(window.history.length > 2) {    
+            navigate(-1);
+            return;
+        }
+        navigate("/");
     }
 
     return (
@@ -140,6 +154,9 @@ function UserLoginPage(props) {
                 </div>
             </div>
             <button css={loginButton} onClick={handleLoginSubmitOnClick}>로그인</button>
+            <a href='http://localhost:8080/oauth2/authorization/google'>구글로그인</a>
+            <a href='http://localhost:8080/oauth2/authorization/naver'>네이버로그인</a>
+            <a href='http://localhost:8080/oauth2/authorization/kakao'>카카오로그인</a>
         </div>
     );
 }
