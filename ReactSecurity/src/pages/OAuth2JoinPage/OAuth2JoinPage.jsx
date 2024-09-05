@@ -114,7 +114,7 @@ function OAuth2JoinPage(props) {
 	const navigate = useNavigate();
 	const [ searchParams ] = useSearchParams();
 
-	const [ selectMenu, setSelectMenu ] = useState("join");
+	const [ selectMenu, setSelectMenu ] = useState("merge");
 
     const [ inputUser, setInputUser ] = useState({
         username: "",
@@ -186,14 +186,11 @@ function OAuth2JoinPage(props) {
 			...inputUser,
 			oauth2Name: searchParams.get("oAuth2Name"),
 			provider: searchParams.get("provider")
-		}
-		const signupData = await oauth2SignupApi(joinUser);
+		};
+		const joinData = await oauth2SignupApi(joinUser);
 
-		console.log(signupData.data);
-
-		if(!signupData.isSuccess) {
-            showFieldErrorMessage(signupData.fieldErrors);
-            console.log(signupData.fieldErrors);
+		if(!joinData.isSuccess) {
+            showFieldErrorMessage(joinData.fieldErrors);
             return;
         }
         
